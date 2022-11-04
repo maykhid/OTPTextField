@@ -62,6 +62,12 @@ class OTPTextField extends StatefulWidget {
 
   final List<TextInputFormatter>? inputFormatter;
 
+  /// The way to prevent the system keyboard from showing is to set the [readOnly] property of TextField to true.
+  final bool readOnly;
+
+  /// Setting [showCursor] to true makes it so that the cursor still works when you are using your custom keyboard.
+  final bool showCursor;
+
   const OTPTextField({
     Key? key,
     this.length = 4,
@@ -71,6 +77,8 @@ class OTPTextField extends StatefulWidget {
     this.spaceBetween = 0,
     this.otpFieldStyle,
     this.hasError = false,
+    this.readOnly = false,
+    this.showCursor = true,
     this.keyboardType = TextInputType.number,
     this.style = const TextStyle(),
     this.outlineBorderRadius: 10,
@@ -187,6 +195,8 @@ class _OTPTextFieldState extends State<OTPTextField> {
         style: widget.style,
         inputFormatters: widget.inputFormatter,
         maxLength: 1,
+        showCursor: widget.showCursor,
+        readOnly: widget.readOnly,
         focusNode: _focusNodes[index],
         obscureText: widget.obscureText,
         decoration: InputDecoration(
