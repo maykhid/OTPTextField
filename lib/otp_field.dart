@@ -68,6 +68,8 @@ class OTPTextField extends StatefulWidget {
   /// Setting [showCursor] to true makes it so that the cursor still works when you are using your custom keyboard.
   final bool showCursor;
 
+  final ValueChanged<int>? currentFocusIndex;
+
   const OTPTextField({
     Key? key,
     this.length = 4,
@@ -92,6 +94,7 @@ class OTPTextField extends StatefulWidget {
         const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
     this.isDense = false,
     this.onCompleted,
+    this.currentFocusIndex,
   })  : assert(length > 1),
         super(key: key);
 
@@ -161,7 +164,10 @@ class _OTPTextFieldState extends State<OTPTextField> {
     if (focusNode == null) {
       _focusNodes[index] = FocusNode();
       focusNode = _focusNodes[index];
-      focusNode?.addListener((() => handleFocusChange(index)));
+      focusNode?.addListener((() {
+        handleFocusChange(index);
+        widget.currentFocusIndex!(index);
+      }));
     }
     if (textEditingController == null) {
       _textControllers[index] = TextEditingController();
@@ -401,9 +407,4 @@ class OtpFieldController {
       focusNode.requestFocus();
     }
   }
-
-  bool hasFocus() => FocusScope.of(_otpTextFieldState.context).hasFocus;
-
-  bool hasPrimaryFocus() =>
-      FocusScope.of(_otpTextFieldState.context).hasPrimaryFocus;
 }

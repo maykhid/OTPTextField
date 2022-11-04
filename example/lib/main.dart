@@ -56,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
             onChanged: (pin) {
               print("Changed: " + pin);
             },
+            currentFocusIndex: (value) => print(value),
             onCompleted: (pin) {
               print("Completed: " + pin);
             }),
