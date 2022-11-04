@@ -401,4 +401,9 @@ class OtpFieldController {
       focusNode.requestFocus();
     }
   }
+
+  bool hasFocus() => FocusScope.of(_otpTextFieldState.context).hasFocus;
+
+  bool hasPrimaryFocus() =>
+      FocusScope.of(_otpTextFieldState.context).hasPrimaryFocus;
 }
